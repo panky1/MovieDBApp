@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="model"
+            type="com.example.movieappinfo.ui.login.LoginViewModel" />
+    </data>
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:fitsSystemWindows="true">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/_24dp"
+            android:paddingTop="@dimen/_56dp"
+            android:paddingRight="@dimen/_24dp">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="@dimen/_150dp"
+                android:layout_height="@dimen/_100dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="@dimen/_12dp"
+                android:src="@drawable/ic_moviedb_logo" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/TextInputLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10dp"
+                app:hintAnimationEnabled="true">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/txtEmail"
+                    style="@style/TextStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_55dp"
+                    android:hint="@string/email_add_hint"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:inputType="textNoSuggestions|textEmailAddress"
+                    android:text="@={model.login.fields.email}"
+                    app:error="@{model.login.emailError}"
+                    app:onFocus="@{model.getEmailOnFocusChangeListener()}"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/TextInputLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10dp"
+                app:hintAnimationEnabled="true">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/txtPassword"
+                    style="@style/TextStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_55dp"
+                    android:hint="@string/label_password"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:ems="10"
+                    android:inputType="textPassword"
+                    android:text="@={model.login.fields.password}"
+                    app:error="@{model.login.passwordError}"
+                    app:onFocus="@{model.getPasswordOnFocusChangeListener()}" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_login"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_24dp"
+                android:layout_marginBottom="@dimen/_24dp"
+                android:enabled="@{model.login.valid}"
+                android:onClick="@{() -> model.onButtonClick()}"
+                android:padding="@dimen/_12dp"
+                android:text="@string/action_login"
+                android:textColor="@color/white"
+                android:background="@drawable/custom_button_bg"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtPassword" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+    </ScrollView>
+</layout>
